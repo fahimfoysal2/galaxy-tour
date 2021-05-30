@@ -1,0 +1,10 @@
+.responsive-image{
+    width: 100%;
+    max-width : 350px;
+    border-radius: 5%;
+}
+
+.centered-image{
+    display : block;
+    margin : 0 auto;
+}
