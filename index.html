@@ -6,17 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello Vue</title>
     <!-- stylesheet -->
+    <link rel="stylesheet" href="./resources/style/bootstrap-grid.min.css">
+    <!-- custom css -->
     <link rel="stylesheet" href="./resources/style/index.css">
     <!-- vue.js -->
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
-    <h1 style="text-align: center;">Relecloud Galaxy Tours</h1>
+    <div class="container">
+        <h1 style="text-align: center;">Relecloud Galaxy Tours</h1>
 
-    <div id="app">
-        <img :src="productImage" alt="productImage" :class="productImageStyle">
-        <h2> {{productName}} </h1>
-        <p> {{productDescription}} </p>
+        <div id="app">
+            <img :src="productImage" alt="productImage" :class="productImageStyle">
+            <h2> {{productName}} </h1>
+            <p> {{productDescription}} </p>
+    
+            <div class="row" v-for="(productClass, key) in productClasses" :key="key">
+                <div class="col"> {{productClass.name}} </div>
+                <div class="col">
+                    Tk. {{productClass.price.toLocaleString("bn-BD")}}
+                </div>
+                <div class="col">
+                    <button class="btn" v-if="productClass.earlyBird">Book Early Bird</button>
+                    <button class="btn" v-else>Book Now!</button>
+                    <sub class="text-danger blink" v-show="productClass.seatsAvailable < 10"> Almost Sold Out!</sub>
+                </div>
+            </div>
+    
+        </div>
     </div>
 
     <!-- Script Section -->
