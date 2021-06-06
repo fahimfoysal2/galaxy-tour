@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./resources/style/bootstrap-grid.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="./resources/style/index.css">
+    <link rel="shortcut icon" type="image" href="./favicon.ico" />
     <!-- vue.js -->
     <script src="https://unpkg.com/vue@next"></script>
 </head>
@@ -18,10 +19,10 @@
 
         <div id="app">
             <img :src="productImage" alt="productImage" :class="productImageStyle">
-            <h2> {{productName}} </h1>
+            <h2> {{productName}} </h2>
             <p> {{productDescription}} </p>
     
-            <div class="row" v-for="(productClass, key) in productClasses" :key="key">
+            <div class="row" v-for="(productClass, key) in productClasses" :id="'package_'+(key+1)">
                 <div class="col"> {{productClass.name}} </div>
                 <div class="col">
                     Tk. {{productClass.price.toLocaleString("bn-BD")}}
@@ -32,7 +33,6 @@
                     <sub class="text-danger blink" v-show="productClass.seatsAvailable < 10"> Almost Sold Out!</sub>
                 </div>
             </div>
-    
         </div>
     </div>
 
