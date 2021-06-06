@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .responsive-image{
     width: 100%;
     max-width : 350px;
@@ -23,6 +26,9 @@
     color: crimson;
 }
 
+.text-success{
+    color: rgb(9, 102, 9);
+}
 /* Blink for Webkit and others
 (Chrome, Safari, Firefox, IE, ...)
 */
@@ -48,4 +54,12 @@
     -webkit-animation-iteration-count:infinite;
     -webkit-animation-timing-function:ease-in-out;
     -webkit-animation-direction: alternate;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-right{
+    text-align: right;
 }

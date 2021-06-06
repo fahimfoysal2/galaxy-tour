@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <form action="" method="get">
+            <span> Name: </span>
+            <input type="text" name="name" v-model="name">
+
+            <br>
+            <input type="checkbox" name="check" v-model="is_active">
+            <span>Is active? </span>
+
+            <span><br></span>
+            <input type="checkbox" name="benift" id="" v-model="benifit" true-value="yes" false-value="no">Benifits:
+            {{benifit}}
+
+            <span><br>Work type: </span>
+            <select name="work_status" id="" v-model="status">
+                <option value="" disabled> Select one </option>
+                <option v-for="status in statusList" :value="status.type">
+                    {{ status.name }}
+                    ( {{ status.description }})
+                </option>
+            </select>
+        </form>
+    </div>
+
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    name: "fahim",
+                    is_active: true,
+                    benifit: 'no',
+                    status: 'full_time',
+                    statusList: [
+                        {
+                            'type': "full_time",
+                            'name': "Full Time",
+                            'description': "Works full time 9:00-5:00 "
+                        },
+                        {
+                            'type': "part_time",
+                            'name': "Part Time",
+                            'description': "Works Project basis "
+                        }
+                    ]
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

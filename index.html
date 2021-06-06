@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Vue</title>
+    <title>Vue Galaxy Tours</title>
     <!-- stylesheet -->
     <link rel="stylesheet" href="./resources/style/bootstrap-grid.min.css">
     <!-- custom css -->
@@ -13,30 +14,66 @@
     <!-- vue.js -->
     <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body>
     <div class="container">
-        <h1 style="text-align: center;">Relecloud Galaxy Tours</h1>
+        <h1 class="text-center">Relecloud Galaxy Tours</h1>
 
         <div id="app">
-            <img :src="productImage" alt="productImage" :class="productImageStyle">
-            <h2> {{productName}} </h2>
-            <p> {{productDescription}} </p>
-    
-            <div class="row" v-for="(productClass, key) in productClasses" :id="'package_'+(key+1)">
-                <div class="col"> {{productClass.name}} </div>
-                <div class="col">
-                    Tk. {{productClass.price.toLocaleString("bn-BD")}}
+            <img :src="product.image.src" alt="product.image.description" :class="product.image.style">
+            <div class="text-center">
+                <h2> {{product.name}} </h2>
+                <p> {{product.description}} </p>
+            </div>
+            <hr>
+
+            <form v-show="!booking.completed">
+                <h2 class="text-center blink">Book Now</h2>
+                <div class="row">
+                    <div class="col text-right">Select Class : </div>
+                    <div class="col">
+                        <select name="classId" id="" v-model="booking.classId" required>
+                            <option value="" disabled> Select A Class </option>
+                            <option v-for="(productClass, id) in product.classes" :value="id">
+                                {{ productClass.name }} ( Tk. {{ productClass.price.toLocaleString("bn-BD") }})
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col">
-                    <button class="btn" v-if="productClass.earlyBird">Book Early Bird</button>
-                    <button class="btn" v-else>Book Now!</button>
-                    <sub class="text-danger blink" v-show="productClass.seatsAvailable < 10"> Almost Sold Out!</sub>
+                <div class="row">
+                    <div class="col text-right">Note : </div>
+                    <div class="col">
+                        <textarea v-model="booking.notes" name="booking_note" id="" cols="18"
+                            rows="3"></textarea>
+                    </div>
+                    
+                </div>
+                <div class="row" v-if="booking.classId !== ''">
+                    <div class="col text-right" >
+                        <sub class="text-danger blink" v-show="product.classes[booking.classId].seatsAvailable < 10"> Almost Sold Out!</sub>
+                    </div>
+                    <div class="col text-left">
+                        <button type="button" class="btn" v-if="product.classes[booking.classId].earlyBird" @click="bookSeat">Book Early Bird</button>
+                        <button type="button" class="btn" v-else @click="bookSeat">Book Now!</button>
+                    </div>
+                </div>
+            </form>
+
+            <div v-show="booking.completed" class="text-center">
+                <h2 class="text-success">Booking Completed</h2>
+                <div class="booking-info">
+                    <b> Class </b>: {{ bookingDisplay }}
+                </div>
+                <div class="note" v-show="booking.notes">
+                    <b> Note </b>: {{ booking.notes }}
                 </div>
             </div>
+
         </div>
     </div>
 
     <!-- Script Section -->
     <script src="./resources/js/index.js"></script>
 </body>
+
 </html>
